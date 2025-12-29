@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레지오 마리애 월례 보고서</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 헤더 */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #1a5490;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+        }
+
+        h1 {
+            color: #1a5490;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* 기본 정보 */
+        .basic-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .info-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-group label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .info-group input,
+        .info-group select {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .info-group input:focus,
+        .info-group select:focus {
+            outline: none;
+            border-color: #1a5490;
+            background: #fff;
+        }
+
+        /* 활동 섹션 */
+        .activity-section {
+            margin-bottom: 25px;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #1a5490 0%, #2d6cb5 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .category-total {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 0 10px;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item label {
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .item input {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            -webkit-text-fill-color: #000 !important;
+            color: #000 !important;
+        }
+
+        .item input:focus {
+            outline: none;
+            border-color: #1a5490;
+            background: #f0f7ff;
+            transform: scale(1.02);
+        }
+
+        .item input::-webkit-outer-spin-button,
+        .item input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* 최종 서명 */
+        .signature {
+            margin: 40px 0 30px 0;
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #1a5490;
+        }
+
+        .signature-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .signature-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .signature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .signature-item label {
+            font-weight: bold;
+            color: #666;
+        }
+
+        .signature-item input {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            min-width: 150px;
+        }
+
+        /* 버튼 */
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(40,167,69,0.3);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #1a5490 0%, #2d6cb5 100%);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(26,84,144,0.3);
+        }
+
+        /* 로딩 */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1a5490;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .basic-info {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .category-header {
+                font-size: 16px;
+                padding: 12px 15px;
+            }
+
+            .signature-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            button {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+
+        /* 출력 스타일 - A4 1페이지 최적화 */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                font-size: 7pt;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 8px;
+                box-shadow: none;
+                margin: 0;
+            }
+
+            .header {
+                margin-bottom: 6px;
+                padding-bottom: 6px;
+                border-bottom: 2px solid #1a5490;
+            }
+
+            .logo {
+                width: 35px;
+                height: 35px;
+                margin-bottom: 3px;
+            }
+
+            h1 {
+                font-size: 14pt;
+                margin-bottom: 2px;
+            }
+
+            .subtitle {
+                font-size: 8pt;
+            }
+
+            .basic-info {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 5px;
+                margin-bottom: 8px;
+                padding: 5px;
+                background: #f8f9fa;
+            }
+
+            .info-group label {
+                font-size: 7pt;
+                margin-bottom: 2px;
+                font-weight: bold;
+            }
+
+            .info-group input,
+            .info-group select {
+                padding: 3px;
+                font-size: 7pt;
+                border: 1px solid #999;
+            }
+
+            .activity-section {
+                margin-bottom: 5px;
+                page-break-inside: avoid;
+            }
+
+            .category-header {
+                padding: 4px 8px;
+                font-size: 8pt;
+                margin-bottom: 4px;
+            }
+
+            .category-total {
+                padding: 2px 6px;
+                font-size: 9pt;
+                font-weight: bold;
+            }
+
+            .items-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 3px;
+                padding: 0 3px;
+            }
+
+            .item label {
+                font-size: 6pt;
+                margin-bottom: 1px;
+                line-height: 1.2;
+            }
+
+            .item input {
+                padding: 2px;
+                font-size: 7pt;
+                border: 1px solid #999;
+                text-align: center;
+            }
+
+            .signature {
+                margin: 6px 0 0 0;
+                padding: 6px;
+                page-break-inside: avoid;
+                border: 1px solid #1a5490;
+            }
+
+            .signature-text {
+                font-size: 9pt;
+                margin-bottom: 4px;
+                font-weight: bold;
+            }
+
+            .signature-info {
+                gap: 15px;
+                flex-direction: row;
+            }
+
+            .signature-item {
+                font-size: 7pt;
+                gap: 3px;
+            }
+
+            .signature-item label {
+                font-weight: bold;
+            }
+
+            .signature-item input {
+                padding: 2px 5px;
+                font-size: 7pt;
+                min-width: 60px;
+                border: 1px solid #999;
+            }
+
+            .btn-container {
+                display: none;
+            }
+
+            .loading {
+                display: none !important;
+            }
+
+            /* 특정 카테고리별 최적화 */
+            #total_cat1, #total_cat2, #total_cat3, #total_cat4, 
+            #total_cat5, #total_cat6, #total_cat7, #total_cat8,
+            #total_cat9, #total_cat10, #total_cat11, #total_cat12 {
+                font-size: 9pt;
+            }
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 8mm 8mm 8mm 8mm;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <div class="header">
+            <img src="data:image/png;base64,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" alt="레지오 마리애" class="logo">
+            <h1>레지오 마리애 월례 보고서</h1>
+            <p class="subtitle">Legion of Mary Monthly Report</p>
+        </div>
+
+        <form id="reportForm">
+            <!-- 기본 정보 -->
+            <div class="basic-info">
+                <div class="info-group">
+                    <label for="report_year">보고 연도</label>
+                    <input type="number" id="report_year" required min="2020" max="2100">
+                </div>
+                <div class="info-group">
+                    <label for="report_month">작성 대상 월</label>
+                    <input type="number" id="report_month" required min="1" max="12">
+                </div>
+                <div class="info-group">
+                    <label for="report_start_seq">시작 차수</label>
+                    <input type="number" id="report_start_seq" required min="1">
+                </div>
+                <div class="info-group">
+                    <label for="report_end_seq">종료 차수</label>
+                    <input type="number" id="report_end_seq" required min="1">
+                </div>
+                <div class="info-group">
+                    <label for="presidium_name">쁘레시디움명</label>
+                    <select id="presidium_name" required>
+                        <option value="">선택하세요</option>
+                        <option value="01.상지의 좌">01.상지의 좌</option>
+                        <option value="02.고통의 성모">02.고통의 성모</option>
+                        <option value="03.원죄없으신 성모">03.원죄없으신 성모</option>
+                        <option value="04.평화의 모후">04.평화의 모후</option>
+                        <option value="05.성모승천">05.성모승천</option>
+                        <option value="06.성모방문">06.성모방문</option>
+                        <option value="07.피난처이신 성모">07.피난처이신 성모</option>
+                        <option value="08.영광의 모후">08.영광의 모후</option>
+                        <option value="09.사랑의 어머니">09.사랑의 어머니</option>
+                        <option value="10.은총의 중개자">10.은총의 중개자</option>
+                        <option value="11.신뢰의 모후">11.신뢰의 모후</option>
+                        <option value="12.의로우신 성모">12.의로우신 성모</option>
+                        <option value="13.희망의 샘">13.희망의 샘</option>
+                        <option value="14.천상의 문">14.천상의 문</option>
+                        <option value="15.순교자의 모후">15.순교자의 모후</option>
+                    </select>
+                </div>
+                <div class="info-group">
+                    <label for="writer_leader">단장</label>
+                    <input type="text" id="writer_leader" required>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 1 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>① 교구 등 지시</span>
+                    <span class="category-total" id="total_cat1">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat1_1">9시주모경</label>
+                        <input type="number" id="cat1_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat1_2">토요기도회</label>
+                        <input type="number" id="cat1_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat1_3">8시가정기도</label>
+                        <input type="number" id="cat1_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat1_4">묵주기도</label>
+                        <input type="number" id="cat1_4" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat1_5">기타사항</label>
+                        <input type="number" id="cat1_5" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 2 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>② 본당지시사항</span>
+                    <span class="category-total" id="total_cat2">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat2_1">평일미사</label>
+                        <input type="number" id="cat2_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat2_2">성시간</label>
+                        <input type="number" id="cat2_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat2_3">성서백주간</label>
+                        <input type="number" id="cat2_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat2_4">복음구절암기</label>
+                        <input type="number" id="cat2_4" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat2_5">성모동산묵주</label>
+                        <input type="number" id="cat2_5" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat2_6">사순대림강좌</label>
+                        <input type="number" id="cat2_6" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat2_7">기타사항</label>
+                        <input type="number" id="cat2_7" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 3 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>③ 입교권면</span>
+                    <span class="category-total" id="total_cat3">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat3_1">외인입교권면</label>
+                        <input type="number" id="cat3_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat3_2">개종권면</label>
+                        <input type="number" id="cat3_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat3_3">가두선교</label>
+                        <input type="number" id="cat3_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat3_4">방문선교</label>
+                        <input type="number" id="cat3_4" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat3_5">기타사항</label>
+                        <input type="number" id="cat3_5" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 4 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>④ 예비신자 돌봄</span>
+                    <span class="category-total" id="total_cat4">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat4_1">교리반인도</label>
+                        <input type="number" id="cat4_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat4_2">통신교리자</label>
+                        <input type="number" id="cat4_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat4_3">교리반봉사</label>
+                        <input type="number" id="cat4_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat4_4">기타사항</label>
+                        <input type="number" id="cat4_4" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 5 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>⑤ 교우돌봄</span>
+                    <span class="category-total" id="total_cat5">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat5_1">새영세자돌봄</label>
+                        <input type="number" id="cat5_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat5_2">전입교우돌봄</label>
+                        <input type="number" id="cat5_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat5_3">냉담교우돌봄</label>
+                        <input type="number" id="cat5_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat5_4">조당자안내</label>
+                        <input type="number" id="cat5_4" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat5_5">교우가정방문</label>
+                        <input type="number" id="cat5_5" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat5_6">기타사항</label>
+                        <input type="number" id="cat5_6" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 6 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>⑥ 어려운분돌봄</span>
+                    <span class="category-total" id="total_cat6">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat6_1">교우환자방문</label>
+                        <input type="number" id="cat6_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_2">외인환자방문</label>
+                        <input type="number" id="cat6_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_3">외인상가방문</label>
+                        <input type="number" id="cat6_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_4">연도</label>
+                        <input type="number" id="cat6_4" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_5">장례미사</label>
+                        <input type="number" id="cat6_5" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_6">상차림</label>
+                        <input type="number" id="cat6_6" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_7">입관</label>
+                        <input type="number" id="cat6_7" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_8">출관</label>
+                        <input type="number" id="cat6_8" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_9">장지수행</label>
+                        <input type="number" id="cat6_9" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_10">추모미사</label>
+                        <input type="number" id="cat6_10" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_11">병자영성체</label>
+                        <input type="number" id="cat6_11" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat6_12">기타사항</label>
+                        <input type="number" id="cat6_12" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 7 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>⑦ 레지오확장</span>
+                    <span class="category-total" id="total_cat7">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat7_1">행동단원모집</label>
+                        <input type="number" id="cat7_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat7_2">협조단원돌봄</label>
+                        <input type="number" id="cat7_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat7_3">입단권유</label>
+                        <input type="number" id="cat7_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat7_4">성당단원모집</label>
+                        <input type="number" id="cat7_4" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat7_5">기타사항</label>
+                        <input type="number" id="cat7_5" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 8 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>⑧ 특별활동</span>
+                    <span class="category-total" id="total_cat8">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat8_1">복지시설봉사</label>
+                        <input type="number" id="cat8_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat8_2">차량봉사</label>
+                        <input type="number" id="cat8_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat8_3">라파엘천사</label>
+                        <input type="number" id="cat8_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat8_4">가밀로회</label>
+                        <input type="number" id="cat8_4" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat8_5">리디아회</label>
+                        <input type="number" id="cat8_5" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat8_6">바오로대학</label>
+                        <input type="number" id="cat8_6" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat8_7">기타사항</label>
+                        <input type="number" id="cat8_7" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 9 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>⑨ 본당협조</span>
+                    <span class="category-total" id="total_cat9">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat9_1">성체분배</label>
+                        <input type="number" id="cat9_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat9_2">전례봉사</label>
+                        <input type="number" id="cat9_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat9_3">주차봉사</label>
+                        <input type="number" id="cat9_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat9_4">성당청소</label>
+                        <input type="number" id="cat9_4" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat9_5">주보접기</label>
+                        <input type="number" id="cat9_5" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat9_6">헌금봉사</label>
+                        <input type="number" id="cat9_6" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat9_7">성물방봉사</label>
+                        <input type="number" id="cat9_7" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat9_8">성가대</label>
+                        <input type="number" id="cat9_8" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat9_9">주방봉사</label>
+                        <input type="number" id="cat9_9" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat9_10">기타사항</label>
+                        <input type="number" id="cat9_10" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 10 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>⑩ 소공동체활동</span>
+                    <span class="category-total" id="total_cat10">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat10_1">소공동체모임</label>
+                        <input type="number" id="cat10_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat10_2">구역.반모임</label>
+                        <input type="number" id="cat10_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat10_3">구역커피봉사</label>
+                        <input type="number" id="cat10_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat10_4">성사표전달</label>
+                        <input type="number" id="cat10_4" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat10_5">구역미사</label>
+                        <input type="number" id="cat10_5" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat10_6">구역청소</label>
+                        <input type="number" id="cat10_6" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat10_7">기타사항</label>
+                        <input type="number" id="cat10_7" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 11 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>⑪ 가정성화활동</span>
+                    <span class="category-total" id="total_cat11">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat11_1">가족함께기도</label>
+                        <input type="number" id="cat11_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat11_2">가족함께미사</label>
+                        <input type="number" id="cat11_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat11_3">외짝교우기도</label>
+                        <input type="number" id="cat11_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat11_4">기타사항</label>
+                        <input type="number" id="cat11_4" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 카테고리 12 -->
+            <div class="activity-section">
+                <div class="category-header">
+                    <span>⑫ 기타활동</span>
+                    <span class="category-total" id="total_cat12">0</span>
+                </div>
+                <div class="items-grid">
+                    <div class="item">
+                        <label for="cat12_1">복음묵상</label>
+                        <input type="number" id="cat12_1" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_2">성모님군단</label>
+                        <input type="number" id="cat12_2" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_3">십자가의길</label>
+                        <input type="number" id="cat12_3" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_4">성체조배</label>
+                        <input type="number" id="cat12_4" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_5">성지순례</label>
+                        <input type="number" id="cat12_5" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_6">피정.교육</label>
+                        <input type="number" id="cat12_6" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_7">교본공부</label>
+                        <input type="number" id="cat12_7" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_8">성경공부</label>
+                        <input type="number" id="cat12_8" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_9">평화방송</label>
+                        <input type="number" id="cat12_9" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_10">출판물보급</label>
+                        <input type="number" id="cat12_10" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_11">작은희생</label>
+                        <input type="number" id="cat12_11" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_12">가족사랑표현</label>
+                        <input type="number" id="cat12_12" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_13">Cu.월례회의</label>
+                        <input type="number" id="cat12_13" min="0" value="0">
+                    </div>
+                    <div class="item">
+                        <label for="cat12_14">기타사항</label>
+                        <input type="number" id="cat12_14" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 최종 서명 -->
+            <div class="signature">
+                <div class="signature-text">상기와 같이 보고합니다</div>
+                <div class="signature-info">
+                    <div class="signature-item">
+                        <label>작성일:</label>
+                        <input type="date" id="submit_date" required>
+                    </div>
+                    <div class="signature-item">
+                        <label>단장:</label>
+                        <input type="text" id="confirm_leader" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 버튼 -->
+            <div class="btn-container">
+                <button type="button" class="btn-print" onclick="printReport()">출력</button>
+                <button type="button" class="btn-submit" onclick="submitReport()">제출</button>
+            </div>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>제출 중...</p>
+        </div>
+    </div>
+
+    <script>
+        // 관리자가 설정하는 구글 스프레드시트 URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyJfl_9HYdZhVNAEhv3poRBk77IgiK8rANKB1ktx-IXRmrmN0rAgZXBlnAjAbiICAe/exec';
+
+        // 카테고리별 항목 개수
+        const CATEGORY_COUNTS = {
+            1: 5,   // 교구 등 지시
+            2: 7,   // 본당지시사항
+            3: 5,   // 입교권면
+            4: 4,   // 예비신자 돌봄
+            5: 6,   // 교우돌봄
+            6: 12,  // 어려운분돌봄
+            7: 5,   // 레지오확장
+            8: 7,   // 특별활동
+            9: 10,  // 본당협조
+            10: 7,  // 소공동체활동
+            11: 4,  // 가정성화활동
+            12: 14  // 기타활동
+        };
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('페이지 로드 완료');
+            
+            // 현재 연도와 월 설정
+            const today = new Date();
+            document.getElementById('report_year').value = today.getFullYear();
+            document.getElementById('report_month').value = today.getMonth() + 1;
+            document.getElementById('submit_date').value = today.toISOString().split('T')[0];
+            
+            // 자동 계산 이벤트 리스너
+            setupAutoCalculations();
+            
+            // 초기 합계 계산
+            calculateAllTotals();
+            
+            console.log('초기화 완료');
+        });
+
+        // 자동 계산 설정
+        function setupAutoCalculations() {
+            // 활동 항목 변경 시 카테고리 합계 계산
+            for (let cat = 1; cat <= 12; cat++) {
+                const itemCount = CATEGORY_COUNTS[cat];
+                for (let i = 1; i <= itemCount; i++) {
+                    const el = document.getElementById(`cat${cat}_${i}`);
+                    if (el) {
+                        el.addEventListener('input', () => calculateCategoryTotal(cat));
+                    }
+                }
+            }
+        }
+
+        // 카테고리 합계 계산
+        function calculateCategoryTotal(cat) {
+            const itemCount = CATEGORY_COUNTS[cat];
+            let total = 0;
+            
+            for (let i = 1; i <= itemCount; i++) {
+                const el = document.getElementById(`cat${cat}_${i}`);
+                if (el) {
+                    total += parseInt(el.value) || 0;
+                }
+            }
+            
+            const totalEl = document.getElementById(`total_cat${cat}`);
+            if (totalEl) {
+                totalEl.textContent = total;
+            }
+        }
+
+        // 모든 카테고리 합계 계산
+        function calculateAllTotals() {
+            for (let cat = 1; cat <= 12; cat++) {
+                calculateCategoryTotal(cat);
+            }
+        }
+
+        // 데이터 수집
+        function collectFormData() {
+            const data = {
+                // 기본 정보
+                report_year: document.getElementById('report_year').value,
+                report_month: document.getElementById('report_month').value,
+                report_start_seq: document.getElementById('report_start_seq').value,
+                report_end_seq: document.getElementById('report_end_seq').value,
+                presidium_name: document.getElementById('presidium_name').value,
+                writer_leader: document.getElementById('writer_leader').value,
+                submit_date: document.getElementById('submit_date').value,
+                confirm_leader: document.getElementById('confirm_leader').value
+            };
+            
+            // 활동 항목들
+            for (let cat = 1; cat <= 12; cat++) {
+                const itemCount = CATEGORY_COUNTS[cat];
+                for (let i = 1; i <= itemCount; i++) {
+                    const el = document.getElementById(`cat${cat}_${i}`);
+                    data[`cat${cat}_${i}`] = el ? el.value : '0';
+                }
+                // 카테고리 합계
+                const totalEl = document.getElementById(`total_cat${cat}`);
+                data[`total_cat${cat}`] = totalEl ? totalEl.textContent : '0';
+            }
+            
+            // 제출 타임스탬프
+            data.submit_timestamp = new Date().toISOString();
+            
+            return data;
+        }
+
+        // 폼 유효성 검사
+        function validateForm() {
+            console.log('폼 유효성 검사 시작');
+            
+            const required = [
+                { id: 'report_year', name: '보고 연도' },
+                { id: 'report_month', name: '작성 대상 월' },
+                { id: 'report_start_seq', name: '시작 차수' },
+                { id: 'report_end_seq', name: '종료 차수' },
+                { id: 'presidium_name', name: '쁘레시디움명' },
+                { id: 'writer_leader', name: '단장' },
+                { id: 'submit_date', name: '작성일' },
+                { id: 'confirm_leader', name: '확인자(단장)' }
+            ];
+            
+            for (const field of required) {
+                const el = document.getElementById(field.id);
+                const value = el ? el.value.trim() : '';
+                
+                console.log(`검사 중: ${field.name} = "${value}"`);
+                
+                if (!value) {
+                    alert(`⚠️ 필수 입력 항목\n\n${field.name}을(를) 입력해주세요.`);
+                    if (el) el.focus();
+                    return false;
+                }
+            }
+            
+            console.log('유효성 검사 통과');
+            return true;
+        }
+
+        // 출력 기능
+        function printReport() {
+            console.log('출력 버튼 클릭됨');
+            
+            // 유효성 검사
+            if (!validateForm()) {
+                console.log('유효성 검사 실패');
+                return;
+            }
+            
+            // 출력 실행
+            window.print();
+        }
+
+        // 보고서 제출
+        async function submitReport() {
+            console.log('제출 버튼 클릭됨!');
+            
+            try {
+                // 1. 유효성 검사
+                if (!validateForm()) {
+                    console.log('유효성 검사 실패');
+                    return;
+                }
+                
+                // 2. URL 확인
+                if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                    alert('⚠️ 관리자 설정 필요\n\n구글 스프레드시트 URL이 설정되지 않았습니다.\n관리자에게 문의하세요.');
+                    console.error('Google Script URL이 설정되지 않음');
+                    return;
+                }
+                
+                // 3. 데이터 수집
+                console.log('데이터 수집 중...');
+                const data = collectFormData();
+                console.log('수집된 데이터:', data);
+                
+                // 4. 제출 확인
+                const confirmMsg = `보고서를 제출하시겠습니까?\n\n쁘레시디움: ${data.presidium_name}\n단장: ${data.writer_leader}\n연월: ${data.report_year}년 ${data.report_month}월`;
+                
+                if (!confirm(confirmMsg)) {
+                    console.log('사용자가 제출 취소');
+                    return;
+                }
+                
+                // 5. 로딩 표시
+                const loadingEl = document.getElementById('loading');
+                if (loadingEl) loadingEl.style.display = 'block';
+                
+                console.log('서버로 전송 중...');
+                
+                // 6. 전송
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                console.log('전송 완료');
+                
+                // 7. 성공 메시지
+                alert('✅ 제출 완료!\n\n보고서가 성공적으로 제출되었습니다.');
+                
+                // 8. 폼 초기화 여부 확인
+                if (confirm('폼을 초기화하시겠습니까?')) {
+                    location.reload();
+                }
+                
+            } catch (error) {
+                console.error('제출 오류:', error);
+                alert('❌ 오류 발생\n\n' + error.message + '\n\n다시 시도해주세요.');
+            } finally {
+                const loadingEl = document.getElementById('loading');
+                if (loadingEl) loadingEl.style.display = 'none';
+            }
+        }
+        
+        // 페이지 로드 시 테스트
+        console.log('JavaScript 로드 완료');
+    </script>
+</body>
+</html>
